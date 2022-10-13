@@ -3,14 +3,14 @@ import { SafeAreaView, Text, View, TouchableOpacity, ActivityIndicator } from 'r
 import styles from './button.style';
 
 
-const Button = ({ text, onPress, loading }) => {
+const Button = ({ text, onPress, loading, theme = 'primary' }) => {
 
     return (
-        <TouchableOpacity style={styles.container} onPress={onPress} disabled={loading} >
+        <TouchableOpacity style={styles[theme].container} onPress={onPress} disabled={loading} >
             {loading ? (
                 <ActivityIndicator color='white' />
             ) : (
-                <Text style={styles.title} >{text} </Text>)
+                <Text style={styles[theme].title} >{text} </Text>)
             }
         </TouchableOpacity>
     )
