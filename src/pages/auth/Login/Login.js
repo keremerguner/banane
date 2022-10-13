@@ -2,19 +2,29 @@ import React from 'react';
 import { Text, View, SafeAreaView } from 'react-native';
 import Input from '../../../components/Input'
 import Button from '../../../components/Button'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
+import styles from './Login.style';
 
-const Login = (props) => (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-        {/* <Button title='Press' onPress={() => props.navigation.navigate('SignPage')} */}
-        {/* <Text>
-            <Text>BANANE</Text>
-            <Icon name="rocket" size={30} color="#900" />
-        </Text> */}
-        <Input placeholder='e-posta giriniz...' />
-        <Input placeholder='sifre giriniz...' />
-        <Button text='Giriş Yap' theme='primary' />
-    </SafeAreaView>
-);
+const Login = ({ navigation }) => {
+
+
+    function handleSubmit() {
+        navigation.navigate('SignPage')
+    }
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <Text style={styles.header} >
+                <Text>Bana ne </Text>
+                <Icon name="feather" size={styles.header.fontSize} color="#5DADE2" />
+            </Text>
+            <Input placeholder='e-postanızı giriniz...' />
+            <Input placeholder='sifrenizi giriniz...' />
+            <Button text='Giriş Yap' theme='primary' />
+            <Button text='Kayıt Ol' theme='secondary' onPress={handleSubmit} />
+        </SafeAreaView>
+    )
+
+}
 
 export default Login;
