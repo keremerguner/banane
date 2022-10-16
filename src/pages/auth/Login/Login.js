@@ -30,11 +30,17 @@ const Login = ({ navigation }) => {
                 formValues.usermail,
                 formValues.password
             );
+            showMessage({
+                message: 'Giriş Yapıldı',
+                icon: 'success',
+                type: "success",
+            });
             setLoading(false)
         } catch (error) {
             showMessage({
                 message: authErrorMessageParser(error.code),
                 type: "danger",
+                icon:'danger'
             });
             console.log(error)
             console.log(formValues)

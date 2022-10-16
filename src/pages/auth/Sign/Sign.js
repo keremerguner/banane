@@ -43,6 +43,7 @@ const Sign = ({ navigation }) => {
             showMessage({
                 message: 'Kullanıcı oluşturuldu',
                 type: "success",
+                icon: 'success'
             });
             navigation.navigate('LoginPage')
 
@@ -50,6 +51,7 @@ const Sign = ({ navigation }) => {
             showMessage({
                 message: authErrorMessageParser(error.code),
                 type: "danger",
+                icon: 'danger'
             });
             setLoading(false)
         }

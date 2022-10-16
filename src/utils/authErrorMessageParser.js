@@ -18,7 +18,8 @@ export default function (errorCode) {
         case 'auth/weak-password':
             return 'Daha güçlü bir parola girin';
 
-
+        case 'auth/user-disabled':
+            return 'Hesabınız engellendi';
         default:
             return errorCode;
     }
