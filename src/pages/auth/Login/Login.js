@@ -1,24 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, SafeAreaView } from 'react-native';
 import Input from '../../../components/Input'
 import Button from '../../../components/Button'
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './Login.style';
 import { Formik } from 'formik';
+import auth from '@react-native-firebase/auth';
+import { showMessage } from "react-native-flash-message";
+import authErrorMessageParser from '../../../utils/authErrorMessageParser'
+
+const initialFormValues = {
+    usermail: '',
+    password: '',
+}
 
 const Login = ({ navigation }) => {
 
-    const initialFormValues = {
-        usermail: '',
-        password: '',
-    }
+    const [loading, setLoading] = useState(false)
 
     function handleSingUp() {
         navigation.navigate('SignPage')
     }
 
-    function handleFormSubmit(formValues) {
-        console.log(formValues)
+    async function handleFormSubmit(formValues) {
+
+        try {
+            setLoading(true)
+            await auth().signInWithEmailAndPassword(
+                formValues.usermail,
+                formValues.password
+            );
+            setLoading(false)
+        } catch (error) {
+            showMessage({
+                message: authErrorMessageParser(error.code),
+                type: "danger",
+            });
+            console.log(error)
+            console.log(formValues)
+            setLoading(false)
+        }
     }
 
     return (
@@ -31,8 +52,8 @@ const Login = ({ navigation }) => {
                 (({ values, handleChange, handleSubmit }) => (
                     <>
                         <Input onChangeText={handleChange('usermail')} value={values.usermail} placeholder='e-postanızı giriniz...' />
-                        <Input onChangeText={handleChange('password')} value={values.password} placeholder='sifrenizi giriniz...' />
-                        <Button text='Giriş Yap' theme='primary' onPress={handleSubmit} />
+                        <Input onChangeText={handleChange('password')} value={values.password} placeholder='sifrenizi giriniz...' isSecure />
+                        <Button text='Giriş Yap' theme='primary' onPress={handleSubmit} loading={loading} />
                     </>
                 ))
             }
