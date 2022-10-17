@@ -6,6 +6,7 @@ import Login from './pages/auth/Login';
 import Sign from './pages/auth/Sign';
 import FlashMessage from "react-native-flash-message";
 import Messages from './pages/Messages';
+import colors from './styles/colors';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +16,6 @@ const Banane = () => {
 
     return (
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name='MessagesPage' component={Messages} />
         <Stack.Screen name='LoginPage' component={Login} />
         <Stack.Screen name='SignPage' component={Sign} />
       </Stack.Navigator>
@@ -24,7 +24,12 @@ const Banane = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator>
+        <Stack.Screen
+          name='MessagesPage'
+          component={Messages}
+          options={{ title: 'Dert Köşesi', headerTintColor: colors.lightBlue }}
+        />
         <Stack.Screen name='AuthStack' component={AuthStack} />
       </Stack.Navigator>
       <FlashMessage position="top" />
