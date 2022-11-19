@@ -48,7 +48,7 @@ const Banane = () => {
                   <Icon
                     name='logout'
                     size={30}
-                    color={colors.lightBlue}
+                    color={'#C0392B'}
                     onPress={() => auth().signOut()}
                   />
                 )

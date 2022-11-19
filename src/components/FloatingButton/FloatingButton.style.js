@@ -12,6 +12,6 @@ export default StyleSheet.create({
         height: 60,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: colors.lightBlue
+        backgroundColor: colors.lightGreen
     }
 })
