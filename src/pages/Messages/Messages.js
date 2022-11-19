@@ -7,6 +7,7 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import parseContentData from '../../utils/parseContentData';
 import MessageCard from '../../components/card/MessageCard'
+import { showMessage } from "react-native-flash-message";
 
 const Messages = () => {
 
@@ -26,6 +27,12 @@ const Messages = () => {
 
     function handleInputToggle() {
         setInputModalVisable(!inputModalVisable)
+        //Database erisim izni verildikten sonra kaldirilacak alan
+        showMessage({
+            message: 'Database erişim izni gerekli',
+            icon: 'warning',
+            type: "warning",
+        });
     }
 
     function handleSendContent(content) {
@@ -51,6 +58,13 @@ const Messages = () => {
         database()
             .ref(`messages/${item.id}/`)
             .update({ dislike: item.dislike + 1 })
+        //Database erisim izni verildikten sonra kaldirilacak alan
+        showMessage({
+            message: 'Database erişim izni gerekli',
+            icon: 'warning',
+            type: "warning",
+        });
+        //alan sonu
     }
 
     const renderContent = ({ item }) => <MessageCard message={item} onPress={() => handlePress(item)} />
